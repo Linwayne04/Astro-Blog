@@ -1,4 +1,5 @@
 ---
+export const prerender = true;
 import path from "node:path";
 import License from "@components/misc/License.astro";
 import Markdown from "@components/misc/Markdown.astro";
@@ -74,10 +75,10 @@ const jsonLd = {
                 <div
                     data-pagefind-body data-pagefind-weight="10" data-pagefind-meta="title"
                     class="transition w-full block font-bold mb-3
-                    text-3xl md:text-[2.25rem]/[2.75rem]
+                    text-[1.5rem]/[1.8rem] md:text-[1.8rem]/[2.2rem]
                     text-black/90 dark:text-white/90
-                    md:before:w-1 before:h-5 before:rounded-md before:bg-[var(--primary)]
-                    before:absolute before:top-[0.75rem] before:left-[-1.125rem]
+                    before:hidden md:before:inline-block md:before:w-1 before:h-[0.85em] before:rounded-md before:bg-[var(--primary)]
+                    before:-ml-[1.125rem] before:mr-2 before:-translate-y-[0.1em]
                 ">
                     {entry.data.title}
                 </div>

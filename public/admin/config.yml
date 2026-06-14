@@ -1,0 +1,73 @@
+# Decap CMS configuration for Fuwari Astro blog
+# Full reference: https://decapcms.org/docs/configuration-options/
+
+backend:
+  name: github
+  repo: Linwayne04/Astro-Blog
+  branch: main
+  site_domain: blog.linwayne.dpdns.org
+  base_url: https://blog.linwayne.dpdns.org
+  auth_endpoint: oauth
+
+# Use editorial workflow if you want drafts/reviews before publishing
+# publish_mode: editorial_workflow
+
+# Where uploaded images are stored in the repo
+media_folder: "src/content/posts/{{slug}}"
+# Path written to the frontmatter image field
+public_folder: "./"
+
+# Match the Astro content collection schema
+locale: "zh_TW"
+
+collections:
+  - name: "posts"
+    label: "文章"
+    label_singular: "文章"
+    folder: "src/content/posts"
+    create: true
+    delete: true
+    # Store each post as src/content/posts/<slug>/index.md
+    path: "{{slug}}/index"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - { label: "標題", name: "title", widget: "string", required: true }
+      - {
+          label: "發布日期",
+          name: "published",
+          widget: "datetime",
+          date_format: "YYYY-MM-DD",
+          time_format: "HH:mm",
+          format: "YYYY-MM-DDTHH:mm:ssZ",
+          required: true,
+        }
+      - {
+          label: "更新日期",
+          name: "updated",
+          widget: "datetime",
+          date_format: "YYYY-MM-DD",
+          time_format: "HH:mm",
+          format: "YYYY-MM-DDTHH:mm:ssZ",
+          required: false,
+        }
+      - {
+          label: "草稿",
+          name: "draft",
+          widget: "boolean",
+          default: false,
+          required: false,
+        }
+      - { label: "分類", name: "category", widget: "string", required: false }
+      - { label: "標籤", name: "tags", widget: "list", required: false }
+      - { label: "描述", name: "description", widget: "text", required: false }
+      - { label: "封面圖", name: "image", widget: "image", required: false }
+      - {
+          label: "語言",
+          name: "lang",
+          widget: "string",
+          default: "zh_TW",
+          required: false,
+        }
+      - { label: "內文", name: "body", widget: "markdown", required: true }

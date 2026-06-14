@@ -1,0 +1,33 @@
+---
+---
+
+<div
+    id="reading-progress"
+    class="fixed top-0 left-0 h-1 bg-[var(--primary)] z-[60] w-0"
+    style="box-shadow: 0 0 0.5rem var(--primary);"
+></div>
+
+<script is:inline>
+(function () {
+    const bar = document.getElementById('reading-progress');
+    if (!bar) return;
+
+    let ticking = false;
+    function updateReadingProgress() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            bar.style.width = `${progress}%`;
+            ticking = false;
+        });
+    }
+
+    window.addEventListener('scroll', updateReadingProgress, { passive: true });
+    window.addEventListener('resize', updateReadingProgress);
+    document.addEventListener('DOMContentLoaded', updateReadingProgress);
+    updateReadingProgress();
+})();
+</script>

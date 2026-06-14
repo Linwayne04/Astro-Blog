@@ -7,6 +7,8 @@ import swup from "@swup/astro";
 import expressiveCode from "astro-expressive-code";
 import icon from "astro-icon";
 import { defineConfig } from "astro/config";
+import node from "@astrojs/node";
+import decapCmsOauth from "astro-decap-cms-oauth";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeComponents from "rehype-components"; /* Render the custom directive content */
 import rehypeKatex from "rehype-katex";
@@ -26,9 +28,13 @@ import { pluginCustomCopyButton } from "./src/plugins/expressive-code/custom-cop
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://fuwari.vercel.app/",
+	site: "https://blog.linwayne.dpdns.org/",
 	base: "/",
 	trailingSlash: "always",
+	output: "server",
+	adapter: node({
+		mode: "standalone",
+	}),
 	integrations: [
 		tailwind({
 			nesting: true,
@@ -49,7 +55,7 @@ export default defineConfig({
 		}),
 		icon({
 			include: {
-				"preprocess: vitePreprocess(),": ["*"],
+				"material-symbols": ["*"],
 				"fa6-brands": ["*"],
 				"fa6-regular": ["*"],
 				"fa6-solid": ["*"],
@@ -100,6 +106,7 @@ export default defineConfig({
 			}
 		}),
         svelte(),
+		decapCmsOauth(),
 		sitemap(),
 	],
 	markdown: {
