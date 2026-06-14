@@ -67,7 +67,6 @@ export default {
 				return new Response("GitHub token exchange failed", { status: 401 });
 			}
 
-			const targetOrigin = env.SITE_DOMAIN ? `https://${env.SITE_DOMAIN}` : "*";
 			const payload = JSON.stringify({
 				token: tokenData.access_token,
 				provider: "github",
@@ -80,8 +79,12 @@ export default {
 <script>
 (function() {
   var payload = ${JSON.stringify(payload)};
-  var targetOrigin = ${JSON.stringify(targetOrigin)};
-  window.opener.postMessage("authorization:github:success:" + payload, targetOrigin);
+  function receiveMessage(e) {
+    window.opener.postMessage("authorization:github:success:" + payload, e.origin);
+    window.removeEventListener("message", receiveMessage);
+  }
+  window.addEventListener("message", receiveMessage);
+  window.opener.postMessage("authorizing:github", "*");
 })();
 </script>
 <p>Authorization complete. You can close this window.</p>

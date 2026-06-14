@@ -1,6 +1,11 @@
 # Decap CMS GitHub OAuth Proxy (Cloudflare Worker)
 
-This worker handles GitHub OAuth login for the Decap CMS admin UI hosted on Cloudflare Pages.
+This worker handles the GitHub OAuth handshake for the Decap CMS admin UI.
+
+It implements the required two-step `postMessage` protocol:
+
+1. `/auth` redirects the user to GitHub.
+2. `/callback` receives the authorization code, exchanges it for an access token, and sends the token back to the Decap CMS parent window via `window.opener.postMessage`.
 
 ## Deploy
 
@@ -16,17 +21,6 @@ npx wrangler deploy
 
 - Homepage URL: `https://blog.linwayne.dpdns.org`
 - Authorization callback URL: `https://fuwari-cms-oauth.YOUR_ACCOUNT.workers.dev/callback`
-
-## Restrict postMessage target origin (optional but recommended)
-
-Edit `wrangler.toml` and uncomment:
-
-```toml
-[vars]
-SITE_DOMAIN = "blog.linwayne.dpdns.org"
-```
-
-Then re-deploy.
 
 ## Sources
 
