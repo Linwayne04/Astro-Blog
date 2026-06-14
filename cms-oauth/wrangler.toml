@@ -1,0 +1,12 @@
+name = "fuwari-cms-oauth"
+main = "src/index.ts"
+compatibility_date = "2025-06-01"
+
+# Optional: restrict postMessage target origin for security.
+# Set to your production domain (without https://), e.g.:
+# [vars]
+# SITE_DOMAIN = "blog.linwayne.dpdns.org"
+
+# Secrets (set via wrangler secret put):
+# GITHUB_CLIENT_ID
+# GITHUB_CLIENT_SECRET

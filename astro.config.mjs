@@ -7,8 +7,6 @@ import swup from "@swup/astro";
 import expressiveCode from "astro-expressive-code";
 import icon from "astro-icon";
 import { defineConfig } from "astro/config";
-import node from "@astrojs/node";
-import decapCmsOauth from "astro-decap-cms-oauth";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeComponents from "rehype-components"; /* Render the custom directive content */
 import rehypeKatex from "rehype-katex";
@@ -31,10 +29,6 @@ export default defineConfig({
 	site: "https://blog.linwayne.dpdns.org/",
 	base: "/",
 	trailingSlash: "always",
-	output: "server",
-	adapter: node({
-		mode: "standalone",
-	}),
 	integrations: [
 		tailwind({
 			nesting: true,
@@ -106,7 +100,6 @@ export default defineConfig({
 			}
 		}),
         svelte(),
-		decapCmsOauth(),
 		sitemap(),
 	],
 	markdown: {

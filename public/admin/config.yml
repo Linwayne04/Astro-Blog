@@ -6,8 +6,9 @@ backend:
   repo: Linwayne04/Astro-Blog
   branch: main
   site_domain: blog.linwayne.dpdns.org
-  base_url: https://blog.linwayne.dpdns.org
-  auth_endpoint: oauth
+  # Replace with your Cloudflare Worker URL after deploying cms-oauth
+  base_url: https://cms-oauth.YOUR_ACCOUNT.workers.dev
+  auth_endpoint: auth
 
 # Use editorial workflow if you want drafts/reviews before publishing
 # publish_mode: editorial_workflow

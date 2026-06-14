@@ -1,7 +1,4 @@
 import rss from "@astrojs/rss";
-
-export const prerender = true;
-
 import { getSortedPosts } from "@utils/content-utils";
 import { url } from "@utils/url-utils";
 import type { APIContext } from "astro";
